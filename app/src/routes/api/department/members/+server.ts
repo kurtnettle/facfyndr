@@ -1,7 +1,7 @@
 import { createDbClient } from '$lib/server/db';
 import { department_stats, faculties, faculty_stats } from '$lib/server/db/schema';
 import { json, type RequestHandler } from '@sveltejs/kit';
-import { eq } from 'drizzle-orm';
+import { eq, sql } from 'drizzle-orm';
 
 function handleError(err: unknown): Response {
 	let errorMessage: string;
@@ -51,7 +51,21 @@ const handleMembers = async (department_id: number) => {
 
 		const [members, stats] = await Promise.all([
 			db.query.faculties.findMany({
-				where: eq(faculties.department_id, department_id)
+				where: eq(faculties.department_id, department_id),
+				orderBy: [
+					sql`CASE
+					WHEN faculties.status = 'left' THEN 2
+    				ELSE 1
+    				END`,
+					sql`CASE 
+					WHEN designation ILIKE '%dean%' THEN 1
+					WHEN designation ILIKE '%chairman%' THEN 2
+					WHEN designation ILIKE '%professor%' THEN 3
+					WHEN designation ILIKE '%lecturer%' THEN 4
+					ELSE 5
+				  END`,
+					faculties.name
+				]
 			}),
 			db.query.department_stats.findFirst({
 				where: eq(department_stats.department_id, department_id)
