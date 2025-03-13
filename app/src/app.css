@@ -129,6 +129,16 @@
 	}
 }
 
+@layer components {
+	.footer-link {
+		@apply font-medium text-blue-500 transition-colors duration-200 hover:text-blue-600 hover:underline;
+	}
+
+	.footer-support-link {
+		@apply flex items-center gap-1.5 rounded-lg px-3 py-1.5 transition-all duration-200;
+	}
+}
+
 /* 
 https://css-tricks.com/custom-scrollbars-in-webkit 
 https://developer.mozilla.org/en-US/docs/Web/CSS/::-webkit-scrollbar
