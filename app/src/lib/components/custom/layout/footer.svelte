@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { Github, Send, Smartphone } from 'lucide-svelte';
+
+	let { isUserOnApp } = $props<boolean>();
 </script>
 
 <footer class="mt-6 border-t border-gray-200 bg-gray-100 dark:border-gray-700 dark:bg-zinc-800/15">
@@ -55,62 +57,66 @@
 				/>
 			</span>
 
-			<div class="my-2 h-px w-12 bg-gray-300 dark:bg-gray-600"></div>
+			{#if !isUserOnApp}
+				<div class="my-2 h-px w-12 bg-gray-300 dark:bg-gray-600"></div>
 
-			<!-- Support Section -->
-			<div class="flex max-w-52 flex-wrap items-center justify-center gap-2 sm:max-w-fit sm:gap-4">
-				<a
-					href="https://github.com/kurtnettle/facfyndr"
-					target="_blank"
-					rel="noopener noreferrer"
-					title="View Source Code"
-					aria-label="View Source Code"
-					class="footer-support-link group hover:bg-gray-200 active:bg-gray-200 dark:hover:bg-gray-700 dark:active:bg-gray-700"
+				<!-- Support Section -->
+				<div
+					class="flex max-w-52 flex-wrap items-center justify-center gap-2 sm:max-w-fit sm:gap-4"
 				>
-					<Github
-						class="h-4 w-4 text-gray-700 group-hover:text-gray-900 group-active:text-gray-900 dark:text-gray-300 dark:group-hover:text-gray-100 dark:group-active:text-gray-100"
-					/>
-					<span
-						class="font-medium text-gray-700 group-hover:text-gray-900 group-active:text-gray-900 dark:text-gray-300 dark:group-hover:text-gray-100 dark:group-active:text-gray-100"
+					<a
+						href="https://github.com/kurtnettle/facfyndr"
+						target="_blank"
+						rel="noopener noreferrer"
+						title="View Source Code"
+						aria-label="View Source Code"
+						class="footer-support-link group hover:bg-gray-200 active:bg-gray-200 dark:hover:bg-gray-700 dark:active:bg-gray-700"
 					>
-						GitHub
-					</span>
-				</a>
+						<Github
+							class="h-4 w-4 text-gray-700 group-hover:text-gray-900 group-active:text-gray-900 dark:text-gray-300 dark:group-hover:text-gray-100 dark:group-active:text-gray-100"
+						/>
+						<span
+							class="font-medium text-gray-700 group-hover:text-gray-900 group-active:text-gray-900 dark:text-gray-300 dark:group-hover:text-gray-100 dark:group-active:text-gray-100"
+						>
+							GitHub
+						</span>
+					</a>
 
-				<a
-					href="/harukaze-app"
-					title="Download Harukaze Android App"
-					aria-label="Download Harukaze Android App"
-					class="footer-support-link group hover:bg-green-100 active:bg-green-100 dark:hover:bg-green-900/30 dark:active:bg-green-900/30"
-				>
-					<Smartphone
-						class="h-4 w-4 text-green-600 group-hover:text-green-700 group-active:text-green-700 dark:text-green-400 dark:group-hover:text-green-300 dark:group-active:text-green-300"
-					/>
-					<span
-						class="font-medium text-green-600 group-hover:text-green-700 group-active:text-green-700 dark:text-green-400 dark:group-hover:text-green-300 dark:group-active:text-green-300"
+					<a
+						href="/harukaze-app"
+						title="Download Harukaze Android App"
+						aria-label="Download Harukaze Android App"
+						class="footer-support-link group hover:bg-green-100 active:bg-green-100 dark:hover:bg-green-900/30 dark:active:bg-green-900/30"
 					>
-						Android
-					</span>
-				</a>
+						<Smartphone
+							class="h-4 w-4 text-green-600 group-hover:text-green-700 group-active:text-green-700 dark:text-green-400 dark:group-hover:text-green-300 dark:group-active:text-green-300"
+						/>
+						<span
+							class="font-medium text-green-600 group-hover:text-green-700 group-active:text-green-700 dark:text-green-400 dark:group-hover:text-green-300 dark:group-active:text-green-300"
+						>
+							Android
+						</span>
+					</a>
 
-				<a
-					href="https://t.me/harukaze_bubt"
-					target="_blank"
-					rel="noopener noreferrer"
-					title="Join Telegram Support Group"
-					aria-label="Join Telegram Support Group"
-					class="footer-support-link group hover:bg-blue-100 active:bg-blue-100 dark:hover:bg-blue-900/30 dark:active:bg-blue-900/30"
-				>
-					<Send
-						class="h-4 w-4 text-blue-500 group-hover:text-blue-600 group-active:text-blue-600 dark:text-blue-400 dark:group-hover:text-blue-300 dark:group-active:text-blue-300"
-					/>
-					<span
-						class="font-medium text-blue-500 group-hover:text-blue-600 group-active:text-blue-600 dark:text-blue-400 dark:group-hover:text-blue-300 dark:group-active:text-blue-300"
+					<a
+						href="https://t.me/harukaze_bubt"
+						target="_blank"
+						rel="noopener noreferrer"
+						title="Join Telegram Support Group"
+						aria-label="Join Telegram Support Group"
+						class="footer-support-link group hover:bg-blue-100 active:bg-blue-100 dark:hover:bg-blue-900/30 dark:active:bg-blue-900/30"
 					>
-						Support
-					</span>
-				</a>
-			</div>
+						<Send
+							class="h-4 w-4 text-blue-500 group-hover:text-blue-600 group-active:text-blue-600 dark:text-blue-400 dark:group-hover:text-blue-300 dark:group-active:text-blue-300"
+						/>
+						<span
+							class="font-medium text-blue-500 group-hover:text-blue-600 group-active:text-blue-600 dark:text-blue-400 dark:group-hover:text-blue-300 dark:group-active:text-blue-300"
+						>
+							Support
+						</span>
+					</a>
+				</div>
+			{/if}
 		</div>
 	</div>
 </footer>

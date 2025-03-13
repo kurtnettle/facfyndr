@@ -9,8 +9,12 @@
 
 	let { children } = $props();
 
+	let isUserOnApp = $state(false);
+
 	onMount(() => {
 		if (!window.HarukazeAndroid) return;
+
+		isUserOnApp = true;
 
 		try {
 			const isDarkMode = window.HarukazeAndroid.isAppDarkMode();
@@ -23,9 +27,12 @@
 
 <ModeWatcher />
 <Toaster richColors />
-<Navbar />
+
+{#if !isUserOnApp}
+	<Navbar />
+{/if}
 
 <main class="min-h-screen">
 	{@render children()}
 </main>
-<Footer />
+<Footer {isUserOnApp} />
