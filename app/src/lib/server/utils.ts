@@ -2,7 +2,30 @@ import type { MemberReportFormSchemaType } from '$lib/components/custom/member-r
 import { createDbClient } from '$lib/server/db/index.js';
 import { faculties, faculty_reports } from '$lib/server/db/schema';
 import type { FacultyMember } from '$lib/types/db';
+import { json } from '@sveltejs/kit';
 import { and, eq } from 'drizzle-orm';
+
+export function handleError(err: unknown): Response {
+	let errorMessage: string;
+
+	if (err instanceof Error) {
+		errorMessage = err.message || 'An unexpected error occurred';
+	} else if (typeof err === 'string') {
+		errorMessage = err;
+	} else {
+		errorMessage = 'An unexpected error occurred';
+	}
+
+	return json(
+		{
+			error: true,
+			message: errorMessage
+		},
+		{
+			status: 500
+		}
+	);
+}
 
 function compProfileUrl(currentUrl: string, newUrl: string): boolean {
 	if (typeof currentUrl !== 'string' || typeof newUrl !== 'string') {

@@ -4,6 +4,7 @@
 	import type { FacultyMember } from '$lib/types/db';
 
 	import { AcademicProfileRow, CardAction, ContactColumn, MemberStatusPill } from '.';
+	import { getProfileUrl } from './faculty-member-utils';
 	import { ContactMethod } from './parts//contact/contact.types';
 	import MemberRoom from './parts/member-room.svelte';
 
@@ -49,7 +50,7 @@
 								rel="noopener noreferrer"
 								class="hover:underline active:underline"
 								title="Visit Faculty Member Profile"
-								href={member.profile_url}
+								href={getProfileUrl(member.department_id, member.profile_url)}
 							>
 								{member.name}</a
 							>

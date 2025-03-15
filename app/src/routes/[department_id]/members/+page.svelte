@@ -3,48 +3,26 @@
 	import { toast } from 'svelte-sonner';
 
 	import { page } from '$app/state';
-	import { getProfileUrl } from '$lib/components/custom/faculty-member-card/faculty-member-utils';
 	import { FacultyMemberTable } from '$lib/components/custom/faculty-member-table';
 	import Spinner from '$lib/components/custom/layout/spinner.svelte';
-	import type { FacultyMember } from '$lib/types/db';
+	import { DeptUtils } from '$lib/utils';
 
-	let elapsedTime = 0;
 	let isLoading = $state(true);
-	let data = $state({ department_id: page.params.department_id });
+	const department_id = page.params.department_id;
+	let data = $state({ department_id: department_id, members: [], modified_at: -1 });
 
 	onMount(async () => {
 		const startTime = Date.now();
 
 		try {
-			const resp = await fetch(
-				`/api/department/members?department_id=${page.params.department_id}`,
-				{
-					method: 'GET',
-					headers: {
-						Accept: 'application/json'
-					}
-				}
-			);
-
-			if (resp.ok) {
-				const json = await resp.json();
-				json.members = json.members.map((member: FacultyMember) => ({
-					...member,
-					profile_url: getProfileUrl(member.department_id, member.profile_url)
-				}));
-
-				data = { ...data, ...json };
-			} else {
-				const msg = 'Failed to get faculty members.';
-				toast.error(msg);
-				console.error(`${msg}: ${resp.statusText}`);
-			}
-			elapsedTime = Date.now() - startTime;
+			const { members, modified_at } = await DeptUtils.fetchAndCacheDeptData(department_id);
+			data = { department_id, members, modified_at };
 		} catch (err) {
 			toast.error('Failed to get faculty members.');
 			console.error(err);
 		} finally {
 			// fix loader overlay flickering
+			const elapsedTime = Date.now() - startTime;
 			setTimeout(
 				() => {
 					isLoading = false;
