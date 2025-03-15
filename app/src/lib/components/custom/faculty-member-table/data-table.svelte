@@ -7,6 +7,7 @@
 		getPaginationRowModel,
 		type PaginationState
 	} from '@tanstack/table-core';
+	import { Frown } from 'lucide-svelte';
 
 	import FacultyMemberCard from '$lib/components/custom/faculty-member-card/faculty-member-card.svelte';
 	import { createSvelteTable } from '$lib/components/ui/data-table/index.js';
@@ -86,8 +87,16 @@
 				{/each}
 			</Table.Row>
 		{:else}
-			<Table.Row>
-				<Table.Cell colspan={columns.length} class="h-24 text-center">No results.</Table.Cell>
+			<Table.Row class="hover:bg-transparent">
+				<Table.Cell colspan={columns.length}>
+					<div class="text-center mx-auto w-fit sm:my-16 my-8">
+						<div>
+							<Frown class="w-16 h-16 mx-auto mb-4 dark:text-gray-300 text-gray-800" />
+							<h2 class="text-xl font-semibold dark:text-gray-300">No Results Found</h2>
+							<p class="mt-2 text-gray-500 dark:text-gray-400">Maybe try refining your search?</p>
+						</div>
+					</div>
+				</Table.Cell>
 			</Table.Row>
 		{/each}
 	</Table.Body>
