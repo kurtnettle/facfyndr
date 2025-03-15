@@ -31,9 +31,15 @@
 	let pagination = $state<PaginationState>({ pageIndex: 0, pageSize: 10 });
 	let columnFilters = $state<ColumnFiltersState>([]);
 
+	/**
+		Empty data causes infinite looping
+		https://github.com/TanStack/table/issues/4566
+	*/
+	const emptyArray: FacultyMember[] = [];
+
 	const table = createSvelteTable({
 		get data() {
-			return data.data.members ?? [];
+			return data.data.members ?? emptyArray;
 		},
 		columns,
 		state: {
