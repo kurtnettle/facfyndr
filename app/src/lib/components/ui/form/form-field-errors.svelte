@@ -2,7 +2,7 @@
 	import type { WithoutChild } from 'bits-ui';
 	import * as FormPrimitive from 'formsnap';
 
-	import { cn } from '$lib/utils.js';
+	import { cn } from '$lib/components/ui/utils.js';
 
 	let {
 		ref = $bindable(null),

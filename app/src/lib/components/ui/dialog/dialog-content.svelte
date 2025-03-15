@@ -3,7 +3,7 @@
 	import X from 'lucide-svelte/icons/x';
 	import type { Snippet } from 'svelte';
 
-	import { cn } from '$lib/utils.js';
+	import { cn } from '$lib/components/ui/utils.js';
 
 	import * as Dialog from './index.js';
 

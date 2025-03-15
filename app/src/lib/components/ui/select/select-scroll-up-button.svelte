@@ -2,7 +2,7 @@
 	import { Select as SelectPrimitive, type WithoutChildrenOrChild } from 'bits-ui';
 	import ChevronUp from 'lucide-svelte/icons/chevron-up';
 
-	import { cn } from '$lib/utils.js';
+	import { cn } from '$lib/components/ui/utils.js';
 
 	let {
 		ref = $bindable(null),

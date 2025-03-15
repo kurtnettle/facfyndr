@@ -3,7 +3,7 @@
 	import emblaCarouselSvelte from 'embla-carousel-svelte';
 	import type { HTMLAttributes } from 'svelte/elements';
 
-	import { cn } from '$lib/utils.js';
+	import { cn } from '$lib/components/ui/utils.js';
 
 	import { getEmblaContext } from './context.js';
 
