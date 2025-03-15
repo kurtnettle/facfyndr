@@ -4,12 +4,21 @@ import { generateReport, getCurrentRecord, submitReport } from '$lib/server/util
 import { message, setError, superValidate } from 'sveltekit-superforms';
 import { zod } from 'sveltekit-superforms/adapters';
 import type { Actions } from './$types.js';
+import { DepartmentMeta } from '$lib/constants/academic';
+import { redirect } from '@sveltejs/kit';
 
 interface TokenValidateResponse {
 	'error-codes': string[];
 	success: boolean;
 	action: string;
 	cdata: string;
+}
+
+export async function load({ params }) {
+	const department_id = DepartmentMeta[params.department_id];
+
+	if (!department_id) redirect(308, '/');
+	return { department_id: department_id.id };
 }
 
 async function validateToken(token: string) {
