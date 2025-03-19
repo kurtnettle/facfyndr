@@ -22,6 +22,9 @@ A community-driven faculty directory developed to help students easily find and 
 
 ## 🌟 Features
 
+- **Progressive Web App (PWA) Support**:  
+  Enhanced user experience with offline functionality, installability, and native app-like performance.
+  
 - **Effortless Search:**  
   Find faculty members in seconds by searching for their name, faculty code, or email.
 
