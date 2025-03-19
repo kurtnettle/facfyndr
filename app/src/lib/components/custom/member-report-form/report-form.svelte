@@ -9,15 +9,16 @@
 	import { Input } from '$lib/components/ui/input/index.js';
 	import type { FacultyMember } from '$lib/types/db';
 
+	import { getProfileUrl } from '../faculty-member-card/faculty-member-utils';
 	import AcademicProfilesSection from './parts/academic-profiles-section.svelte';
 	import ContactSection from './parts/contact-section.svelte';
 	import { formSchema } from './report-form-schema';
 
 	let { member, open = $bindable() }: { member: FacultyMember; open: boolean } = $props();
+	let resetTurnstile = $state<() => void>();
 
 	let localMember = JSON.parse(JSON.stringify(member));
-
-	let resetTurnstile = $state<() => void>();
+	localMember.profile_url = getProfileUrl(member.department_id, member.profile_url);
 
 	const form = superForm(localMember, {
 		validators: zodClient(formSchema),
