@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
+	import { MemberStatistics } from '$lib/components/custom/components';
 	import {
 		BrowseAllCard,
 		FacultyCard,
 		FacultyCardContainer
 	} from '$lib/components/custom/faculty-card';
-	import FacultyMembersStat from '$lib/components/custom/faculty-stats/MemberStatistics.svelte';
 	import FacultyDepartments from '$lib/constants/academic';
 
 	let memberStats = $state();
@@ -32,7 +32,8 @@
 			<img
 				class="inline size-6 align-middle sm:size-10"
 				src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f680/512.webp"
-				alt="rocket"
+				alt="🚀"
+				loading="lazy"
 			/>
 		</h2>
 		<p class="px-4 text-center text-base leading-8 text-gray-600 sm:text-lg dark:text-gray-300">
@@ -51,5 +52,5 @@
 		</div>
 	</div>
 
-	<FacultyMembersStat {memberStats} />
+	<MemberStatistics {memberStats} />
 </main>

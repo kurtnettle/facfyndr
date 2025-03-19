@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Github, Send, Smartphone } from 'lucide-svelte';
 
-	let { isUserOnApp } = $props<boolean>();
+	let { isUserOnApp, cacheVersion } = $props();
 </script>
 
 <footer class="mt-6 border-t border-gray-200 bg-gray-100 dark:border-gray-700 dark:bg-zinc-800/15">
@@ -117,6 +117,13 @@
 					</a>
 				</div>
 			{/if}
+
+			<div class="my-0.5 text-xs">
+				Current built time:
+				<span class="mx-0.5 rounded-sm bg-zinc-200 px-1.5 font-mono dark:bg-zinc-800"
+					>{cacheVersion}</span
+				>
+			</div>
 		</div>
 	</div>
 </footer>
